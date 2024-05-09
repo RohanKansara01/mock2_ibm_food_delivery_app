@@ -8,11 +8,14 @@ const userSchema=mongoose.Schema({
     email:{type:String, required:true},
     password:{type:String, required:true},
     address:{
-        street:{type:String, required:true},
-        city:{type:String, required:true},
-        state:{type:String, required:true},
-        country:{type:String, required:true},
-        zip:{type:String, required:true},
+        type:Object,
+        properties:{
+            street:{type:String, required:true},
+            city:{type:String, required:true},
+            state:{type:String, required:true},
+            country:{type:String, required:true},
+            zip:{type:String, required:true},
+        }
     }
 })
 
@@ -22,18 +25,23 @@ const User=mongoose.model("User",userSchema);
 const restaurantSchema=mongoose.Schema({
     name:{type:String, required:true},
     address:{
-        street:{type:String, required:true},
-        city:{type:String, required:true},
-        state:{type:String, required:true},
-        country:{type:String, required:true},
-        zip:{type:String, required:true},
+        type:Object,
+        properties:{
+            street:{type:String, required:true},
+            city:{type:String, required:true},
+            state:{type:String, required:true},
+            country:{type:String, required:true},
+            zip:{type:String, required:true},
+        }
     },
-    menu:[{
-        name:{type:String, required:true},
-        description:{type:String, required:true},
-        price:{type:Number, required:true},
-        image:{type:String, required:true},
-    }]
+    menu:{type:Array,
+        properties:{
+            name:{type:String, required:true},
+            description:{type:String, required:true},
+            price:{type:Number, required:true},
+            image:{type:String, required:true},
+        }
+    }
 })
 
 const Restaurant=mongoose.model("Restaurant",restaurantSchema);
@@ -42,18 +50,23 @@ const Restaurant=mongoose.model("Restaurant",restaurantSchema);
 const orderSchema=mongoose.Schema({
     user : { type: ObjectId, ref: 'User' },
     restaurant : { type: ObjectId, ref: 'Restaurant' },
-    items:[{
-        name:{type:String, required:true},
-        price:{type:Number, required:true},
-        quantity:{type:Number, required:true},
-    }],
+    items:{type:Array,
+        properties:{
+            name:{type:String, required:true},
+            price:{type:Number, required:true},
+            quantity:{type:Number, required:true},
+        }
+    },
     totalPrice:{type:Number, required:true},
     deliveryAddress:{
-        street:{type:String, required:true},
-        city:{type:String, required:true},
-        state:{type:String, required:true},
-        country:{type:String, required:true},
-        zip:{type:String, required:true},
+        type:Object,
+        properties:{
+            street:{type:String, required:true},
+            city:{type:String, required:true},
+            state:{type:String, required:true},
+            country:{type:String, required:true},
+            zip:{type:String, required:true},
+        }
     },
     status:{type:String, required:true}
 })

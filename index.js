@@ -33,6 +33,6 @@ app.listen(PORT ,()=>{
     try {
         console.log(`Connected to PORT:${PORT}`);
     } catch (error) {
-        console.log(`error connection to PORT:${PORT}`)
+        console.log(`error connecting to PORT:${PORT}`)
     }
 })
