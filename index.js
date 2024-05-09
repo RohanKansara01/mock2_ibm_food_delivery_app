@@ -2,10 +2,13 @@ const express=require('express');
 const app=express();
 app.use(express.json());
 const bcrypt=require('bcrypt');
+const jwt=require('jsonwebtoken');
 
 
 const{connection, User, Restaurant, Order}=require('./db');
 
+
+//Registering
 app.post("/api/register", async(req,res)=>{
     try {
         const user=req.body;
@@ -25,6 +28,59 @@ app.post("/api/register", async(req,res)=>{
         });
     } catch (error) {
         console.log("error registering the user");
+    }
+})
+
+
+//Login
+app.post("/api/login", async(req ,res)=>{
+    try {
+        const data=req.body;
+        const email=data.email;
+        console.log(data)
+        const user=await User.findOne({email});
+        console.log(email)
+        console.log(user)
+        const hashed=user.password;
+        bcrypt.compare(data.password, hashed, function(err, result){
+            if(result===true){
+                const token=jwt.sign({userID:user._id} ,"rohan");
+                console.log(token)
+                res.status(201).send({message:'you are loged in', token:token});
+                console.log(token);
+            }else{
+                res.status(401).send("user not found");
+                console.log("this error is from login", err)
+            }
+        });
+    } 
+    catch (error) {
+        console.log("Error login in");    
+    }
+})
+
+
+//POST restaurant data
+app.post('/api/restaurants', async(req, res)=>{
+    try {
+        const data = await Flight.create(req.body);
+        res.status(201).send(data); 
+        console.log('data posted: ', data);
+    } catch (error) {
+        console.error('Error posting data: ', error);
+        res.status(500).send('Internal Server Error');
+    }
+})
+
+
+//GET all restaurants
+app.get("/api/restaurants", async(req ,res)=>{
+    try {
+        const data = await Flight.find();
+        res.status(200).send(data)
+        console.log('data recieved successfully');
+    } catch (error) {
+        console.log("error getting the data")
     }
 })
 
