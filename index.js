@@ -63,11 +63,11 @@ app.post("/api/login", async(req ,res)=>{
 //POST restaurant data
 app.post('/api/restaurants', async(req, res)=>{
     try {
-        const data = await Flight.create(req.body);
+        const data=await Flight.create(req.body);
         res.status(201).send(data); 
-        console.log('data posted: ', data);
+        console.log('data posted successfully', data);
     } catch (error) {
-        console.error('Error posting data: ', error);
+        console.error('Error posting data', error);
         res.status(500).send('Internal Server Error');
     }
 })
