@@ -119,8 +119,8 @@ app.post('/api/orders', async(req, res)=>{
 //GET order by id
 app.get("/api/orders/id", async(req ,res)=>{        
     try {
-        const restaurantId=req.params.id;
-        const data=await Order.find(restaurantId);
+        const orderId=req.params.id;
+        const data=await Order.find(orderId);
         console.log(data)
         res.status(200).send(data);
         //console.log('order');
@@ -128,6 +128,23 @@ app.get("/api/orders/id", async(req ,res)=>{
         console.log(error)
     }
 })
+
+
+//PUT order changes
+app.put('/api/orders/id', async(req, res)=>{
+    try {
+        const data=req.body;
+        const id=req.query.id; 
+        const update=await Order.findById(id);
+        update.status=data.status || update.status;
+        const updatedOrder=await update.save();
+        res.status(204).send(updatedOrder);
+        console.log('Order status updated');
+    } catch (error) {
+        console.error('Error updating order status :', error); 
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 
 const PORT=8080;
