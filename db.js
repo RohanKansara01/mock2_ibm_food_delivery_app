@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 const connection=mongoose.connect(`mongodb+srv://rohankansara2000:test@databasetest.cehhvv0.mongodb.net/FoodDeliveryApp`);
-
+const{Schema}=mongoose;
 const ObjectId=Schema.Types.ObjectId;
 
 const userSchema=mongoose.Schema({
