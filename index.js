@@ -173,3 +173,25 @@ app.listen(PORT ,()=>{
 //     "image": "String"
 //   }]
 // }
+
+
+
+
+// {
+// 	 "user" :"663cec36aea497212c6f46bf",
+// 	 "restaurant" : "663cf7cd7654a90effbc96cc",
+//    "items": [{
+//      "name": "String",
+//      "price": 1500,
+//      "quantity": 2
+//    }],
+//    "totalPrice": 3000,
+//    "deliveryAddress": {
+//      "street": "String",
+//      "city": "String",
+//      "state": "String",
+//      "country": "String",
+//      "zip": "String"
+//    },
+//    "status": "Placed"
+// }
